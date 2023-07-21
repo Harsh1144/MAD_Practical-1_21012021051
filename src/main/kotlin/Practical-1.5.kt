@@ -1,23 +1,22 @@
-fun main(){
-    println("enter month number")
-    val x= readLine()!!.toString()
-   when(x){
-       1.toString() -> println("Jan")
-       2.toString() -> println("Feb")
-       3.toString() -> println("Mar")
-       4.toString() -> println("Apr")
-       5.toString() -> println("May")
-       6.toString() -> println("Jun")
-       7.toString() -> println("Jul")
-       8.toString() -> println("Aug")
-       9.toString() -> println("Sep")
-       10.toString() -> println("Oct")
-       11.toString() -> println("Nov")
-       12.toString() -> println("Dec")
-       else
-
-
-
-}
+fun main()
+{
+    print("Enter Month number:")
+    var a= readLine()!!.toInt()
+    when(a)
+    {
+        1-> println("January")
+        2-> println("February")
+        3-> println("March")
+        4-> println("April")
+        5-> println("May")
+        6-> println("June")
+        7-> println("July")
+        8-> println("August")
+        9-> println("September")
+        10-> println("October")
+        11-> println("November")
+        12-> println("December")
+        else-> println("Enter Valid Number")
+    }
 
 }
