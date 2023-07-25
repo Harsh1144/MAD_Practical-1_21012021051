@@ -11,11 +11,18 @@
         var arr5 = intArrayOf(1, 2, 3, 4, 5,)
         val a2=arr5.joinToString(" ")
         println("using intArrayOf() method:"+a2)
-
         var arr6 = arrayOf(intArrayOf(1, 2), intArrayOf(4, 5), intArrayOf(7, 8))
+            println(arr6.contentDeepToString())
+        print("Enter number of Elements : ")
+        val size : Int = readLine()!!.toInt()
+        val user = IntArray(size) {0}
 
-        for (row in arr6) {
-            print(row.contentToString())
+
+        for(i in 0 until size)
+        {
+            print("a[$i]:")
+            user[i] = readLine()!!.toInt()
         }
-
+        print("Entered Array = ")
+        println(user.contentToString())
     }
