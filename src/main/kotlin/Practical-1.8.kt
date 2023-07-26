@@ -13,6 +13,9 @@
         println("using intArrayOf() method:"+a2)
         var arr6 = arrayOf(intArrayOf(1, 2), intArrayOf(4, 5), intArrayOf(7, 8))
             println(arr6.contentDeepToString())
+        var arr7 = arrayOf(10, 20, 3, 35, 23)
+            arr7.sort()
+            println(arr7.contentToString())
         print("Enter number of Elements : ")
         val size : Int = readLine()!!.toInt()
         val user = IntArray(size) {0}
@@ -25,4 +28,6 @@
         }
         print("Entered Array = ")
         println(user.contentToString())
+
+
     }
