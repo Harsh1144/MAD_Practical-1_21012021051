@@ -5,7 +5,6 @@ fun  main()
     var value=fact(n)
     println("Factorial:" + value)
 }
-
 fun fact(num:Int):Int
 {
     if(num==0 || num==1)
@@ -13,6 +12,4 @@ fun fact(num:Int):Int
     else{
         return num * fact(num-1)
     }
-
-
 }

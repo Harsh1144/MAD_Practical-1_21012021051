@@ -1,4 +1,4 @@
-import java.util.function.ToIntBiFunction
+
 
 fun main(){
     println("Enter number=")
