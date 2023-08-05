@@ -1,95 +1,91 @@
-fun main()
+class Matrix(var data: Array<IntArray>)
 {
+    val rows: Int = data.size
+    val columns: Int = data[0].size
+    operator fun plus(other: Matrix): Matrix
+    {
+        val resultData  = Array(rows) {IntArray(columns)}
+        for (i in 0 until rows)
+        {
+            for (j in 0 until columns)
+            {
+                resultData[i][j] = data[i][j] + other.data[i][j]
+            }
+        }
+        return Matrix(resultData)
+    }
 
+    operator fun minus(other: Matrix): Matrix
+    {
+        val resultData  = Array(rows) {IntArray(columns)}
+        for (i in 0 until rows)
+        {
+            for (j in 0 until columns)
+            {
+                resultData[i][j] = data[i][j] - other.data[i][j]
+            }
+        }
+        return Matrix(resultData)
+    }
 
-    val firstMatrix = Matrix(arrayOf(intArrayOf(3, -2, 5), intArrayOf(3, 0, 4)), 2, 3)
-    val secondMatrix1 = Matrix(arrayOf(intArrayOf(2, 3), intArrayOf(-9, 0), intArrayOf(0, 4)), 3, 2)
-    val secondMatrix2 = Matrix(arrayOf(intArrayOf(6, 3), intArrayOf(9, 0), intArrayOf(5, 4)), 3, 2)
-
-    println("*********************** Addition ***********************")
-    println("Matrix 1 : ")
-    println(secondMatrix2.toString())
-    println("Matrix 2 : ")
-    println(secondMatrix1.toString())
-    val addMatrix = secondMatrix2 + secondMatrix1
-    println("Addition : $addMatrix")
-
-    println("*********************** Subtraction ***********************")
-    println("Matrix 1 : ")
-    println(secondMatrix2.toString())
-    println("Matrix 2 : ")
-    println(secondMatrix1.toString())
-    val subMatrix = secondMatrix2 - secondMatrix1
-    println("Subtraction : $subMatrix")
-
-    println("*********************** Multiplication ***********************")
-    println("Matrix 1 : ")
-    println(firstMatrix.toString())
-    println("Matrix 2 : ")
-    println(secondMatrix1.toString())
-    val mulMatrix = firstMatrix * secondMatrix1
-    println("Multiplication : $mulMatrix")
-}
-class Matrix(private val matrix: Array<IntArray>, private val rows: Int, private val cols: Int)
-{
+    operator fun times(other: Matrix): Matrix
+    {
+        val resultData  = Array(rows) {IntArray(other.columns) {0} }
+        for (i in 0 until rows)
+        {
+            for (j in 0 until other.columns)
+            {
+                for (k in 0 until columns)
+                    resultData[i][j] += data[i][k] * other.data[k][j]
+            }
+        }
+        return Matrix(resultData)
+    }
 
     override fun toString(): String
     {
-        var res = "($rows x $cols Matrix): \n"
-        for (i in matrix)
+        val sb = StringBuilder()
+        for (i in 0 until rows)
         {
-            for (j in i)
+            for (j in 0 until columns)
             {
-                res += "$j\t"
+                sb.append("${data[i][j]}\t")
             }
-            res += "\n"
+            sb.append("\n")
         }
-        return res
+        return sb.toString()
     }
+}
+fun main()
+{
+    val firstMatrix = Matrix(arrayOf(intArrayOf(2, 3,1), intArrayOf(-9, 0,4), intArrayOf(0, 4,2)))
+    val secondMatrix =Matrix(arrayOf(intArrayOf(6, 3,5), intArrayOf(9, 0,2), intArrayOf(5, 4,-3)))
 
-    operator fun plus(obj: Matrix): Matrix
-    {
-        val sum = Array(this.rows) { IntArray(this.cols) }
 
-        for (i in 0 until this.rows)
-        {
-            for (j in 0 until this.cols)
-            {
-                sum[i][j] = this.matrix[i][j] + obj.matrix[i][j]
-            }
-        }
-        return Matrix(sum, this.rows, this.cols)
-    }
+    println("********** Addition **********")
+    println("Matrix : 1 ")
+    println(firstMatrix)
+    println("Matrix : 2 ")
+    println(secondMatrix)
+    val thirdMatrix = firstMatrix + secondMatrix
+    println("Addition : ")
+    println(thirdMatrix)
 
-    operator fun minus(obj: Matrix): Matrix
-    {
-        val sub = Array(this.rows) { IntArray(this.cols) }
+    println("********** Subtraction **********")
+    println("Matrix : 1 ")
+    println(firstMatrix)
+    println("Matrix : 2 ")
+    println(secondMatrix)
+    val subtractMatrix = firstMatrix - secondMatrix
+    println("Subtraction : ")
+    println(subtractMatrix)
 
-        for (i in 0 until this.rows)
-        {
-            for (j in 0 until this.cols)
-            {
-                sub[i][j] = this.matrix[i][j] - obj.matrix[i][j]
-            }
-        }
-        return Matrix(sub, this.rows, this.cols)
-    }
-
-    operator fun times(obj: Matrix): Matrix
-    {
-        val mul = Array(this.rows) { IntArray(obj.cols) }
-
-        for (i in 0 until this.rows)
-        {
-            for (j in 0 until obj.cols)
-            {
-                mul[i][j] = 0
-                for (k in 0..obj.cols)
-                {
-                    mul[i][j] += this.matrix[i][k] * obj.matrix[k][j]
-                }
-            }
-        }
-        return Matrix(mul, this.rows, obj.cols)
-    }
+    println("********** Multiplication **********")
+    println("Matrix : 1 ")
+    println(firstMatrix)
+    println("Matrix : 2 ")
+    println(secondMatrix)
+    val multiplication = firstMatrix * secondMatrix
+    println("Multiplication : ")
+    println(multiplication)
 }
